@@ -2,14 +2,21 @@
 #define BFS_H
 
 #include <vector>
+#include <queue>
+#include <deque>
+#include <list>
+#include "vectorclass.h"  // Ensure this is the correct path for your VectorClass header
 
-// Function prototypes
-int bfs_queue(const std::vector<std::vector<int>>& graph, int start_node);
-int bfs_deque(const std::vector<std::vector<int>>& graph, int start_node);
-int bfs_list(const std::vector<std::vector<int>>& graph, int start_node);
-int bfs_simd_queue(const std::vector<std::vector<int>>& graph, int start_node);
+// BFS using queue
+void bfs_queue(const std::vector<std::vector<int>>& graph, int start, std::vector<int>& visited);
 
-// Function declaration
-std::vector<std::vector<int>> create_graph(int n);
+// BFS using deque
+void bfs_deque(const std::vector<std::vector<int>>& graph, int start, std::vector<int>& visited);
 
-#endif // BFS_H
+// BFS using linked list
+void bfs_linked_list(const std::vector<std::vector<int>>& graph, int start, std::vector<int>& visited);
+
+// SIMD BFS using queue
+void bfs_queue_simd(const std::vector<std::vector<int>>& graph, int start, std::vector<int>& visited);
+
+#endif  // BFS_H
