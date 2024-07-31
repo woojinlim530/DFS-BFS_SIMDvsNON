@@ -3,6 +3,7 @@
 #include <deque>
 #include <list>
 #include <vector>
+#include "vectorclass.h"
 
 void bfs_queue(const std::vector<std::vector<int>>& graph, int start, std::vector<int>& visited) {
     std::queue<int> q;
@@ -67,10 +68,13 @@ void bfs_queue_simd(const std::vector<std::vector<int>>& graph, int start, std::
         int node = q.front();
         q.pop();
 
-        for (int i = 0; i < graph[node].size(); i += 4) {
-            Vec4i neighbors = Vec4i().load(&graph[node][i]);
+        // Assuming Vec4i for 128-bit SIMD with 4 integers
+        for (size_t i = 0; i < graph[node].size(); i += 4) {
+            // Load 4 integers from graph[node] into SIMD register
+            Vec4i neighbors;
+            neighbors.load(&graph[node][i]);
 
-            for (int j = 0; j < 4 && i + j < graph[node].size(); ++j) {
+            for (size_t j = 0; j < 4 && i + j < graph[node].size(); ++j) {
                 int neighbor = neighbors[j];
                 if (!visited[neighbor]) {
                     visited[neighbor] = true;
