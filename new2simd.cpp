@@ -18,32 +18,48 @@ void bfs_simd_queue(const std::vector<std::vector<int>> &graph, int start, std::
 
         bfs_order.push_back(node); // Record the node visit order
 
-        for (size_t i = 0; i + 4 <= graph[node].size(); i += 4)
+        size_t num_neighbors = graph[node].size();
+        size_t num_simd_batches = num_neighbors / 4;
+
+        // Process neighbors in batches of 4 using SIMD
+        for (size_t batch = 0; batch < num_simd_batches; ++batch)
         {
-            Vec4i neighbors(&graph[node][i]); // Load 4 neighbors
-            Vec4i mask = Vec4i(
-                visited[graph[node][i]],
-                visited[graph[node][i + 1]],
-                visited[graph[node][i + 2]],
-                visited[graph[node][i + 3]]);
+            size_t offset = batch * 4;
+
+            // Load 4 neighbors
+            Vec4i neighbors;
+            for (int i = 0; i < 4; ++i)
+            {
+                neighbors[i] = graph[node][offset + i];
+            }
+
+            // Create masks for visited status
+            Vec4i visited_mask;
+            for (int i = 0; i < 4; ++i)
+            {
+                visited_mask[i] = visited[neighbors[i]] ? 1 : 0;
+            }
+
             Vec4i zero(0);
             Vec4i one(1);
 
-            // Check if neighbors are visited
-            mask = select(mask == zero, one, zero);
+            // Determine which neighbors are not visited
+            Vec4i mask = select(visited_mask == zero, one, zero);
 
-            for (int j = 0; j < 4; ++j)
+            // Use the mask to determine which neighbors should be processed
+            for (int i = 0; i < 4; ++i)
             {
-                if (mask[j] == 1)
+                if (mask[i] == 1)
                 {
-                    visited[neighbors[j]] = true; // Mark as visited
-                    dq.push_back(neighbors[j]);   // Push to queue
+                    int neighbor = neighbors[i];
+                    visited[neighbor] = true; // Mark as visited
+                    dq.push_back(neighbor);   // Push to queue
                 }
             }
         }
 
         // Handle remaining neighbors that don't fit in the SIMD vector
-        for (size_t i = (graph[node].size() / 4) * 4; i < graph[node].size(); ++i)
+        for (size_t i = num_simd_batches * 4; i < num_neighbors; ++i)
         {
             int neighbor = graph[node][i];
             if (!visited[neighbor])
