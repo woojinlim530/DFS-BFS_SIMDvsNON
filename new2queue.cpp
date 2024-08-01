@@ -2,21 +2,27 @@
 #include <queue>
 #include <chrono>
 #include <iostream>
+#include <cstdlib> // For rand() and srand()
+#include <ctime>   // For time()
 
 // BFS using a queue and recording BFS order
-void bfs_queue(const std::vector<std::vector<int>>& graph, int start, std::vector<bool>& visited, std::vector<int>& bfs_order) {
+void bfs_queue(const std::vector<std::vector<int>> &graph, int start, std::vector<bool> &visited, std::vector<int> &bfs_order)
+{
     std::queue<int> q;
     q.push(start);
     visited[start] = true;
 
-    while (!q.empty()) {
+    while (!q.empty())
+    {
         int node = q.front();
         q.pop();
 
         bfs_order.push_back(node); // Record the node visit order
 
-        for (int neighbor : graph[node]) {
-            if (!visited[neighbor]) {
+        for (int neighbor : graph[node])
+        {
+            if (!visited[neighbor])
+            {
                 visited[neighbor] = true;
                 q.push(neighbor);
             }
@@ -25,9 +31,12 @@ void bfs_queue(const std::vector<std::vector<int>>& graph, int start, std::vecto
 }
 
 // Print edges of the graph
-void print_edges(const std::vector<std::vector<int>>& graph) {
-    for (int u = 0; u < graph.size(); ++u) {
-        for (int v : graph[u]) {
+void print_edges(const std::vector<std::vector<int>> &graph)
+{
+    for (int u = 0; u < graph.size(); ++u)
+    {
+        for (int v : graph[u])
+        {
             if (u < v) // To avoid printing the same edge twice in an undirected graph
             {
                 std::cout << "{" << u << ", " << v << "}" << std::endl;
@@ -37,23 +46,35 @@ void print_edges(const std::vector<std::vector<int>>& graph) {
 }
 
 // Print BFS order
-void print_bfs_order(const std::vector<int>& bfs_order) {
+void print_bfs_order(const std::vector<int> &bfs_order)
+{
     std::cout << "BFS Order:" << std::endl;
-    for (int node : bfs_order) {
+    for (int node : bfs_order)
+    {
         std::cout << node << " ";
     }
     std::cout << std::endl;
 }
 
-int main() {
-    int n = 10; // Adjust the size
+int main()
+{
+    int n = 100000; // Adjust the size
     std::vector<std::vector<int>> graph(n);
 
-    // Example: Manually adding edges for demonstration
-    // Replace this with actual edge addition logic
-    for (int i = 0; i < n - 1; ++i) {
-        graph[i].push_back(i + 1);
-        graph[i + 1].push_back(i); // Undirected graph, add both directions
+    // Seed the random number generator
+    std::srand(std::time(nullptr));
+
+    // Generate a random graph
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = i + 1; j < n; ++j)
+        {
+            if (std::rand() % 2 == 0)
+            { // Randomly decide to add an edge
+                graph[i].push_back(j);
+                graph[j].push_back(i); // Undirected graph, add both directions
+            }
+        }
     }
 
     std::vector<bool> visited(n, false);
