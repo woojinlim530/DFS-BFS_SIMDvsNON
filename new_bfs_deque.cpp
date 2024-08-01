@@ -27,7 +27,7 @@ void bfs_deque(const std::vector<std::vector<int>> &graph, int start, std::vecto
 
 int main()
 {
-    int n = 10000; // Larger graph
+    int n = 1000000; // Larger graph
     std::vector<std::vector<int>> graph(n);
     std::vector<int> visited(n, false);
 
@@ -47,6 +47,6 @@ int main()
 
     std::chrono::duration<double> duration = end - start;
     std::cout << "Deque BFS with size " << n << ": " << duration.count() << " s" << std::endl;
-
+    
     return 0;
 }
