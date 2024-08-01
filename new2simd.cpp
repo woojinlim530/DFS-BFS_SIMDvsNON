@@ -93,7 +93,7 @@ void print_bfs_order(const std::vector<int> &bfs_order)
 
 int main()
 {
-    int n = 100000; // Graph size set to 100,000
+    int n = 10; // Graph size set to 100,000
     std::vector<std::vector<int>> graph(n);
     std::vector<int> visited(n, false);
     std::vector<int> bfs_order; // Vector to store BFS order
@@ -103,8 +103,10 @@ int main()
     {
         for (int j = i + 1; j < n && j < i + 10; ++j)
         {
-            graph[i].push_back(j);
-            graph[j].push_back(i);
+            if(rand() %2 == 0){
+                graph[i].push_back(j);
+                graph[j].push_back(i); // Undirected graph, add both directions
+            }
         }
     }
 
