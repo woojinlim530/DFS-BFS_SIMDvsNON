@@ -2,6 +2,7 @@
 #include <deque>
 #include <chrono>
 #include <iostream>
+#include <random>
 #include "vectorclass.h" // Ensure the correct path to the VectorClass library
 
 // BFS using SIMD with a deque and recording BFS order
@@ -93,19 +94,25 @@ void print_bfs_order(const std::vector<int> &bfs_order)
 
 int main()
 {
-    int n = 10; // Graph size set to 100,000
+    int n = 100000; // Graph size set to 100,000
     std::vector<std::vector<int>> graph(n);
     std::vector<int> visited(n, false);
     std::vector<int> bfs_order; // Vector to store BFS order
 
-    // Adding edges to the graph
+    // Create a random graph
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(0, n - 1);
+
     for (int i = 0; i < n; ++i)
     {
-        for (int j = i + 1; j < n && j < i + 10; ++j)
-        {
-            if(rand() %2 == 0){
-                graph[i].push_back(j);
-                graph[j].push_back(i); // Undirected graph, add both directions
+        for (int j = 0; j < 10; ++j)
+        { // Adjust this to control the average number of edges per node
+            int neighbor = dis(gen);
+            if (neighbor != i && std::find(graph[i].begin(), graph[i].end(), neighbor) == graph[i].end())
+            {
+                graph[i].push_back(neighbor);
+                graph[neighbor].push_back(i); // Undirected graph, add both directions
             }
         }
     }
