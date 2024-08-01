@@ -36,9 +36,19 @@ void print_edges(const std::vector<std::vector<int>> &graph)
     }
 }
 
+void print_bfs_order(const std::vector<int> &bfs_order)
+{
+    std::cout << "BFS Order:" << std::endl;
+    for (int node : bfs_order)
+    {
+        std::cout << node << " ";
+    }
+    std::cout << std::endl;
+}
+
 int main()
 {
-    int n = 100000; // Adjust the size
+    int n = 10; // Adjust the size
     std::vector<std::vector<int>> graph(n);
 
     // Example: Manually adding edges for demonstration
@@ -50,6 +60,7 @@ int main()
     }
 
     std::vector<bool> visited(n, false);
+    std::vector<int> bfs_order;
 
     // Optionally, print edges before running BFS
     std::cout << "Edges in the graph:" << std::endl;
@@ -61,6 +72,9 @@ int main()
 
     std::chrono::duration<double> elapsed = end_time - start_time;
     std::cout << "Queue BFS with size " << n << ": " << elapsed.count() << " s" << std::endl;
+
+    print_bfs_order(bfs_order);
+
 
     return 0;
 }
