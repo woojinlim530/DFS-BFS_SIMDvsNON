@@ -50,7 +50,7 @@ int main()
             graph[j].push_back(i); // Undirected graph, add both directions
         }
     }
-    // a
+
     std::vector<bool> visited(n, false);
 
     // Optionally, print edges before running BFS
