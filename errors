@@ -1,60 +1,9 @@
-wla177@asb9840u-a08:~/DFS-BFS_SIMDvsNON$ gcc new_bfs_queue.o -o new_bfs_queue
-/usr/bin/ld: new_bfs_queue.o: warning: relocation against `_ZSt4cout' in read-only section `.text'
-/usr/bin/ld: new_bfs_queue.o: in function `main':
-/home/wla177/DFS-BFS_SIMDvsNON/new_bfs_queue.cpp:65: undefined reference to `std::chrono::_V2::system_clock::now()'
-/usr/bin/ld: /home/wla177/DFS-BFS_SIMDvsNON/new_bfs_queue.cpp:67: undefined reference to `std::chrono::_V2::system_clock::now()'
-/usr/bin/ld: /home/wla177/DFS-BFS_SIMDvsNON/new_bfs_queue.cpp:70: undefined reference to `std::cout'
-/usr/bin/ld: /home/wla177/DFS-BFS_SIMDvsNON/new_bfs_queue.cpp:70: undefined reference to `std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)'
-/usr/bin/ld: /home/wla177/DFS-BFS_SIMDvsNON/new_bfs_queue.cpp:70: undefined reference to `std::ostream::operator<<(int)'
-/usr/bin/ld: /home/wla177/DFS-BFS_SIMDvsNON/new_bfs_queue.cpp:70: undefined reference to `std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)'
-/usr/bin/ld: /home/wla177/DFS-BFS_SIMDvsNON/new_bfs_queue.cpp:70: undefined reference to `std::ostream::operator<<(double)'
-/usr/bin/ld: /home/wla177/DFS-BFS_SIMDvsNON/new_bfs_queue.cpp:70: undefined reference to `std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)'
-/usr/bin/ld: /home/wla177/DFS-BFS_SIMDvsNON/new_bfs_queue.cpp:70: undefined reference to `std::basic_ostream<char, std::char_traits<char> >& std::endl<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&)'
-/usr/bin/ld: /home/wla177/DFS-BFS_SIMDvsNON/new_bfs_queue.cpp:70: undefined reference to `std::ostream::operator<<(std::ostream& (*)(std::ostream&))'
-/usr/bin/ld: /home/wla177/DFS-BFS_SIMDvsNON/new_bfs_queue.cpp:75: undefined reference to `std::cout'
-/usr/bin/ld: /home/wla177/DFS-BFS_SIMDvsNON/new_bfs_queue.cpp:75: undefined reference to `std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)'
-/usr/bin/ld: /home/wla177/DFS-BFS_SIMDvsNON/new_bfs_queue.cpp:75: undefined reference to `std::ostream::operator<<(int)'
-/usr/bin/ld: /home/wla177/DFS-BFS_SIMDvsNON/new_bfs_queue.cpp:75: undefined reference to `std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)'
-/usr/bin/ld: /home/wla177/DFS-BFS_SIMDvsNON/new_bfs_queue.cpp:75: undefined reference to `std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)'
-/usr/bin/ld: /home/wla177/DFS-BFS_SIMDvsNON/new_bfs_queue.cpp:75: undefined reference to `std::basic_ostream<char, std::char_traits<char> >& std::endl<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&)'
-/usr/bin/ld: /home/wla177/DFS-BFS_SIMDvsNON/new_bfs_queue.cpp:75: undefined reference to `std::ostream::operator<<(std::ostream& (*)(std::ostream&))'
-/usr/bin/ld: new_bfs_queue.o: in function `__static_initialization_and_destruction_0(int, int)':
-/usr/include/c++/11/iostream:74: undefined reference to `std::ios_base::Init::Init()'
-/usr/bin/ld: /usr/include/c++/11/iostream:74: undefined reference to `std::ios_base::Init::~Init()'
-/usr/bin/ld: new_bfs_queue.o: in function `std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >::_S_check_init_len(unsigned long, std::allocator<std::vector<int, std::allocator<int> > > const&)':
-/usr/include/c++/11/bits/stl_vector.h:1770: undefined reference to `std::__throw_length_error(char const*)'
-/usr/bin/ld: new_bfs_queue.o: in function `std::vector<int, std::allocator<int> >::_S_check_init_len(unsigned long, std::allocator<int> const&)':
-/usr/include/c++/11/bits/stl_vector.h:1770: undefined reference to `std::__throw_length_error(char const*)'
-/usr/bin/ld: new_bfs_queue.o: in function `std::_Deque_base<int, std::allocator<int> >::_M_initialize_map(unsigned long)':
-/usr/include/c++/11/bits/stl_deque.h:638: undefined reference to `__cxa_begin_catch'
-/usr/bin/ld: /usr/include/c++/11/bits/stl_deque.h:643: undefined reference to `__cxa_rethrow'
-/usr/bin/ld: /usr/include/c++/11/bits/stl_deque.h:638: undefined reference to `__cxa_end_catch'
-/usr/bin/ld: new_bfs_queue.o: in function `void std::deque<int, std::allocator<int> >::_M_push_back_aux<int const&>(int const&)':
-/usr/include/c++/11/bits/deque.tcc:493: undefined reference to `std::__throw_length_error(char const*)'
-/usr/bin/ld: new_bfs_queue.o: in function `std::vector<int, std::allocator<int> >::_M_check_len(unsigned long, char const*) const':
-/usr/include/c++/11/bits/stl_vector.h:1759: undefined reference to `std::__throw_length_error(char const*)'
-/usr/bin/ld: new_bfs_queue.o: in function `std::_Deque_base<int, std::allocator<int> >::_M_create_nodes(int**, int**)':
-/usr/include/c++/11/bits/stl_deque.h:665: undefined reference to `__cxa_begin_catch'
-/usr/bin/ld: /usr/include/c++/11/bits/stl_deque.h:668: undefined reference to `__cxa_rethrow'
-/usr/bin/ld: /usr/include/c++/11/bits/stl_deque.h:665: undefined reference to `__cxa_end_catch'
-/usr/bin/ld: new_bfs_queue.o: in function `__gnu_cxx::new_allocator<int*>::deallocate(int**, unsigned long)':
-/usr/include/c++/11/ext/new_allocator.h:145: undefined reference to `operator delete(void*, unsigned long)'
-/usr/bin/ld: new_bfs_queue.o: in function `__gnu_cxx::new_allocator<int>::allocate(unsigned long, void const*)':
-/usr/include/c++/11/ext/new_allocator.h:116: undefined reference to `std::__throw_bad_array_new_length()'
-/usr/bin/ld: /usr/include/c++/11/ext/new_allocator.h:117: undefined reference to `std::__throw_bad_alloc()'
-/usr/bin/ld: /usr/include/c++/11/ext/new_allocator.h:127: undefined reference to `operator new(unsigned long)'
-/usr/bin/ld: new_bfs_queue.o: in function `__gnu_cxx::new_allocator<int>::deallocate(int*, unsigned long)':
-/usr/include/c++/11/ext/new_allocator.h:145: undefined reference to `operator delete(void*, unsigned long)'
-/usr/bin/ld: new_bfs_queue.o: in function `__gnu_cxx::new_allocator<std::vector<int, std::allocator<int> > >::deallocate(std::vector<int, std::allocator<int> >*, unsigned long)':
-/usr/include/c++/11/ext/new_allocator.h:145: undefined reference to `operator delete(void*, unsigned long)'
-/usr/bin/ld: new_bfs_queue.o: in function `__gnu_cxx::new_allocator<int*>::allocate(unsigned long, void const*)':
-/usr/include/c++/11/ext/new_allocator.h:116: undefined reference to `std::__throw_bad_array_new_length()'
-/usr/bin/ld: /usr/include/c++/11/ext/new_allocator.h:117: undefined reference to `std::__throw_bad_alloc()'
-/usr/bin/ld: /usr/include/c++/11/ext/new_allocator.h:127: undefined reference to `operator new(unsigned long)'
-/usr/bin/ld: new_bfs_queue.o: in function `__gnu_cxx::new_allocator<std::vector<int, std::allocator<int> > >::allocate(unsigned long, void const*)':
-/usr/include/c++/11/ext/new_allocator.h:116: undefined reference to `std::__throw_bad_array_new_length()'
-/usr/bin/ld: /usr/include/c++/11/ext/new_allocator.h:117: undefined reference to `std::__throw_bad_alloc()'
-/usr/bin/ld: /usr/include/c++/11/ext/new_allocator.h:127: undefined reference to `operator new(unsigned long)'
-/usr/bin/ld: new_bfs_queue.o:(.data.rel.local.DW.ref.__gxx_personality_v0[DW.ref.__gxx_personality_v0]+0x0): undefined reference to `__gxx_personality_v0'
-/usr/bin/ld: warning: creating DT_TEXTREL in a PIE
-collect2: error: ld returned 1 exit status
+g++ new2simd.cpp -c -g
+new2simd.cpp: In function ‘void bfs_simd_queue(const std::vector<std::vector<int> >&, int, std::vector<int>&, std::vector<int>&)’:
+new2simd.cpp:23:29: error: invalid conversion from ‘const value_type*’ {aka ‘const int*’} to ‘int’ [-fpermissive]
+   23 |             Vec4i neighbors(&graph[node][i]); // Load 4 neighbors
+In file included from vectorclass.h:45,
+                 from new2simd.cpp:5:
+vectori128.h:2789:15: note:   initializing argument 1 of ‘Vec4i::Vec4i(int)’
+ 2789 |     Vec4i(int i) {
+      |           ~~~~^
