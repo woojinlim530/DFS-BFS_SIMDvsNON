@@ -79,6 +79,20 @@
     "charconv": "cpp",
     "execution": "cpp",
     "optional": "cpp",
-    "variant": "cpp"
-}
+    "variant": "cpp",
+    "__tree": "cpp",
+    "codecvt": "cpp",
+    "forward_list": "cpp",
+    "fstream": "cpp",
+    "map": "cpp",
+    "set": "cpp",
+    "typeindex": "cpp",
+    "unordered_set": "cpp",
+    "cfenv": "cpp",
+    "cinttypes": "cpp",
+    "__bits": "cpp",
+    "__errc": "cpp",
+    "__nullptr": "cpp",
+    "__string": "cpp"
+  }
 }
