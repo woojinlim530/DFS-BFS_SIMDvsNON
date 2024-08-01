@@ -4,7 +4,7 @@
 #include <iostream>
 #include <cstdlib> // For rand() and srand()
 #include <ctime>   // For time()
-
+#include "vectorclass.h"
 // BFS using SIMD with a deque and recording BFS order
 void bfs_simd_queue(const std::vector<std::vector<int>> &graph, int start, std::vector<int> &visited, std::vector<int> &bfs_order)
 {
@@ -94,7 +94,7 @@ void print_bfs_order(const std::vector<int> &bfs_order)
 
 int main()
 {
-    int n = 100000; // Graph size set to 100,000
+    int n = 10; // Graph size set to 100,000
     std::vector<std::vector<int>> graph(n);
     std::vector<int> visited(n, false);
     std::vector<int> bfs_order; // Vector to store BFS order
