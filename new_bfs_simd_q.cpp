@@ -47,7 +47,7 @@ void bfs_simd_queue(const std::vector<std::vector<int>> &graph, int start, std::
 
 int main()
 {
-    int n = 10000; // Larger graph
+    int n = 100000; // Larger graph
     std::vector<std::vector<int>> graph(n);
     std::vector<int> visited(n, false);
 
