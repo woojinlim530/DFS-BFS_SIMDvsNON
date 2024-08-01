@@ -1,83 +1,106 @@
+#include "bfs.h"
 #include <iostream>
 #include <vector>
 #include <chrono>
-#include "bfs.h"
+#include <cstdlib>
+#include <ctime>
+#include <algorithm>
 
-void run_bfs_tests(const std::vector<std::vector<int>>& graph, int start, const std::string& size_label) {
-    std::vector<int> visited(graph.size(), false);
+// Function prototypes
+void run_test(int num_nodes);
+void run_dummy_test(int num_nodes);
 
-    auto start_time = std::chrono::high_resolution_clock::now();
-    bfs_queue(graph, start, visited);
-    auto end_time = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> diff = end_time - start_time;
-    std::cout << size_label << " Queue BFS: " << diff.count() << " s\n";
+// Function to run a dummy test to warm up the system
+void run_dummy_test(int num_nodes) {
+    std::vector<std::vector<int>> dummy_graph(num_nodes);
+    std::vector<int> dummy_visited(num_nodes, false);
 
-    std::fill(visited.begin(), visited.end(), false);
-    start_time = std::chrono::high_resolution_clock::now();
-    bfs_deque(graph, start, visited);
-    end_time = std::chrono::high_resolution_clock::now();
-    diff = end_time - start_time;
-    std::cout << size_label << " Deque BFS: " << diff.count() << " s\n";
-
-    std::fill(visited.begin(), visited.end(), false);
-    start_time = std::chrono::high_resolution_clock::now();
-    bfs_linked_list(graph, start, visited);
-    end_time = std::chrono::high_resolution_clock::now();
-    diff = end_time - start_time;
-    std::cout << size_label << " Linked List BFS: " << diff.count() << " s\n";
-
-    std::fill(visited.begin(), visited.end(), false);
-    start_time = std::chrono::high_resolution_clock::now();
-    bfs_queue_simd(graph, start, visited);
-    end_time = std::chrono::high_resolution_clock::now();
-    diff = end_time - start_time;
-    std::cout << size_label << " SIMD Queue BFS: " << diff.count() << " s\n";
-}
-
-void dummy_tests(const std::vector<std::vector<int>>& graph, int start) {
-    std::vector<int> dummy(graph.size(), false);
-
-    for (int i = 0; i < 3; ++i) {
-        bfs_queue(graph, start, dummy);
-        bfs_deque(graph, start, dummy);
-        bfs_linked_list(graph, start, dummy);
-        bfs_queue_simd(graph, start, dummy);
-    }
-}
-
-std::vector<std::vector<int>> generate_graph(int size) {
-    std::vector<std::vector<int>> graph(size);
-    for (int i = 0; i < size; ++i) {
-        for (int j = 0; j < 10; ++j) {  // Example graph structure
-            int neighbor = (i + j) % size;
-            graph[i].push_back(neighbor);
+    // Randomly connect nodes in the dummy graph
+    std::srand(std::time(nullptr));
+    for (int i = 0; i < num_nodes; ++i) {
+        for (int j = i + 1; j < num_nodes; ++j) {
+            if (std::rand() % 2 == 0) {
+                dummy_graph[i].push_back(j);
+                dummy_graph[j].push_back(i); // Undirected graph
+            }
         }
     }
-    return graph;
+
+    // Run all BFS algorithms with dummy data
+    bfs_queue(dummy_graph, 0, dummy_visited);
+    bfs_deque(dummy_graph, 0, dummy_visited);
+    bfs_linked_list(dummy_graph, 0, dummy_visited);
+    bfs_queue_simd(dummy_graph, 0, dummy_visited);
+}
+
+// Function to run the BFS tests with actual data
+void run_test(int num_nodes) {
+    // Initialize the graph with random edges
+    std::vector<std::vector<int>> graph(num_nodes);
+    std::vector<int> visited(num_nodes, false);
+
+    // Randomly connect nodes
+    std::srand(std::time(nullptr));
+    for (int i = 0; i < num_nodes; ++i) {
+        for (int j = i + 1; j < num_nodes; ++j) {
+            if (std::rand() % 2 == 0) {
+                graph[i].push_back(j);
+                graph[j].push_back(i); // Undirected graph
+            }
+        }
+    }
+
+    // Print graph size
+    std::cout << "Testing with graph size: " << num_nodes << std::endl;
+
+    // Run dummy tests before actual tests
+    std::cout << "Running dummy tests..." << std::endl;
+    run_dummy_test(num_nodes);
+
+    // Measure BFS with Queue
+    auto start = std::chrono::high_resolution_clock::now();
+    bfs_queue(graph, 0, visited);
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed = end - start;
+    std::cout << "Queue BFS: " << elapsed.count() << " s" << std::endl;
+
+    // Reset visited vector
+    std::fill(visited.begin(), visited.end(), false);
+
+    // Measure BFS with Deque
+    start = std::chrono::high_resolution_clock::now();
+    bfs_deque(graph, 0, visited);
+    end = std::chrono::high_resolution_clock::now();
+    elapsed = end - start;
+    std::cout << "Deque BFS: " << elapsed.count() << " s" << std::endl;
+
+    // Reset visited vector
+    std::fill(visited.begin(), visited.end(), false);
+
+    // Measure BFS with Linked List
+    start = std::chrono::high_resolution_clock::now();
+    bfs_linked_list(graph, 0, visited);
+    end = std::chrono::high_resolution_clock::now();
+    elapsed = end - start;
+    std::cout << "Linked List BFS: " << elapsed.count() << " s" << std::endl;
+
+    // Reset visited vector
+    std::fill(visited.begin(), visited.end(), false);
+
+    // Measure BFS with SIMD Queue
+    start = std::chrono::high_resolution_clock::now();
+    bfs_queue_simd(graph, 0, visited);
+    end = std::chrono::high_resolution_clock::now();
+    elapsed = end - start;
+    std::cout << "SIMD Queue BFS: " << elapsed.count() << " s" << std::endl;
 }
 
 int main() {
-    std::vector<std::pair<int, std::string>> sizes = {
-        {1024, "1K"}, 
-        {2048, "2K"}, 
-        {4096, "4K"}, 
-        {8192, "8K"}, 
-        {16384, "16K"},
-        {32768, "32K"},
-        {65536, "64K"},
-        {131072, "128K"},
-        {262144, "256K"},
-        {524288, "512K"},
-        {1048576, "1M"}
-    };
+    // Define graph sizes to test
+    std::vector<int> sizes = {100, 1000, 10000, 100000, 1000000};
 
-    for (const auto& [size, label] : sizes) {
-        auto graph = generate_graph(size);
-        std::cout << "Testing with graph size: " << label << "\n";
-        
-        dummy_tests(graph, 0);  // Run dummy tests before the actual tests
-        std::cout <<"dummy test success\n";
-        run_bfs_tests(graph, 0, label);  // Run actual BFS tests
+    for (int size : sizes) {
+        run_test(size);
     }
 
     return 0;
