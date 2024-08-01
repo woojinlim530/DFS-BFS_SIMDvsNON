@@ -31,14 +31,19 @@ void bfs_simd_queue(const std::vector<std::vector<int>> &graph, int start, std::
             neighbors.load(&graph[node][offset]);
 
             // Create masks for visited status
-            Vec4i visited_mask;
-            visited_mask.load(&visited[neighbors[0]]);
-            Vec4i mask = select(visited_mask == 0, 1, 0);
+            Vec4i visited_indices;
+            visited_indices.load(&visited[neighbors[0]]);
+            Vec4ib visited_mask = visited_indices == 0; // Create mask for unvisited nodes
+
+            Vec4i one(1);
+            Vec4i zero(0);
 
             // Use the mask to determine which neighbors should be processed
+            Vec4i to_process = select(visited_mask, one, zero);
+
             for (int i = 0; i < 4; ++i)
             {
-                if (mask[i] == 1)
+                if (to_process[i] == 1)
                 {
                     int neighbor = neighbors[i];
                     visited[neighbor] = true; // Mark as visited
