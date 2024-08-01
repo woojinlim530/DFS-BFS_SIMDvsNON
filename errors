@@ -1,9 +1,17 @@
-g++ new2simd.cpp -c -g
 new2simd.cpp: In function ‘void bfs_simd_queue(const std::vector<std::vector<int> >&, int, std::vector<int>&, std::vector<int>&)’:
-new2simd.cpp:23:29: error: invalid conversion from ‘const value_type*’ {aka ‘const int*’} to ‘int’ [-fpermissive]
-   23 |             Vec4i neighbors(&graph[node][i]); // Load 4 neighbors
+new2simd.cpp:36:32: error: call of overloaded ‘select(Vec4ib, int, int)’ is ambiguous
+   36 |             Vec4i mask = select(visited_mask == 0, 1, 0);
+      |                          ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
 In file included from vectorclass.h:45,
                  from new2simd.cpp:5:
-vectori128.h:2789:15: note:   initializing argument 1 of ‘Vec4i::Vec4i(int)’
- 2789 |     Vec4i(int i) {
-      |           ~~~~^
+vectori128.h:3260:21: note: candidate: ‘Vec4i select(Vec4ib, Vec4i, Vec4i)’
+ 3260 | static inline Vec4i select(Vec4ib const s, Vec4i const a, Vec4i const b) {
+      |                     ^~~~~~
+vectori128.h:3608:22: note: candidate: ‘Vec4ui select(Vec4ib, Vec4ui, Vec4ui)’
+ 3608 | static inline Vec4ui select(Vec4ib const s, Vec4ui const a, Vec4ui const b) {
+      |                      ^~~~~~
+In file included from vectorclass.h:46,
+                 from new2simd.cpp:5:
+vectorf128.h:870:21: note: candidate: ‘Vec4f select(Vec4fb, Vec4f, Vec4f)’
+  870 | static inline Vec4f select(Vec4fb const s, Vec4f const a, Vec4f const b) {
+      |                     ^~~~~~
