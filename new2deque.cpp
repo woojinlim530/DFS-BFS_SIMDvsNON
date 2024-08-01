@@ -38,7 +38,7 @@ void print_edges(const std::vector<std::vector<int>> &graph)
 
 int main()
 {
-    int n = 100000; // Adjust the size
+    int n = 10000; // Adjust the size
     std::vector<std::vector<int>> graph(n);
 
     // complete graph
