@@ -2,7 +2,8 @@
 #include <deque>
 #include <chrono>
 #include <iostream>
-#include "vectorclass.h" // Ensure the correct path to the VectorClass library
+#include <cstdlib> // For rand() and srand()
+#include <ctime>   // For time()
 
 // BFS using SIMD with a deque and recording BFS order
 void bfs_simd_queue(const std::vector<std::vector<int>> &graph, int start, std::vector<int> &visited, std::vector<int> &bfs_order)
@@ -93,19 +94,24 @@ void print_bfs_order(const std::vector<int> &bfs_order)
 
 int main()
 {
-    int n = 10; // Graph size set to 100,000
+    int n = 100000; // Graph size set to 100,000
     std::vector<std::vector<int>> graph(n);
     std::vector<int> visited(n, false);
     std::vector<int> bfs_order; // Vector to store BFS order
 
-    // Adding edges to the graph
+    // Seed the random number generator
+    std::srand(std::time(0));
+
+    // Create a random graph
     for (int i = 0; i < n; ++i)
     {
-        for (int j = i + 1; j < n && j < i + 10; ++j)
+        for (int j = i + 1; j < n; ++j)
         {
-            graph[i].push_back(j);
-            graph[j].push_back(i);
-            
+            if (std::rand() % 2 == 0)
+            { // Randomly decide whether to add an edge
+                graph[i].push_back(j);
+                graph[j].push_back(i); // Undirected graph, add both directions
+            }
         }
     }
 
