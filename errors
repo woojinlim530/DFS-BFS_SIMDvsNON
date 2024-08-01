@@ -1,17 +1,585 @@
-new2simd.cpp: In function ‘void bfs_simd_queue(const std::vector<std::vector<int> >&, int, std::vector<int>&, std::vector<int>&)’:
-new2simd.cpp:36:32: error: call of overloaded ‘select(Vec4ib, int, int)’ is ambiguous
-   36 |             Vec4i mask = select(visited_mask == 0, 1, 0);
-      |                          ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
-In file included from vectorclass.h:45,
-                 from new2simd.cpp:5:
-vectori128.h:3260:21: note: candidate: ‘Vec4i select(Vec4ib, Vec4i, Vec4i)’
- 3260 | static inline Vec4i select(Vec4ib const s, Vec4i const a, Vec4i const b) {
-      |                     ^~~~~~
-vectori128.h:3608:22: note: candidate: ‘Vec4ui select(Vec4ib, Vec4ui, Vec4ui)’
- 3608 | static inline Vec4ui select(Vec4ib const s, Vec4ui const a, Vec4ui const b) {
-      |                      ^~~~~~
-In file included from vectorclass.h:46,
-                 from new2simd.cpp:5:
-vectorf128.h:870:21: note: candidate: ‘Vec4f select(Vec4fb, Vec4f, Vec4f)’
-  870 | static inline Vec4f select(Vec4fb const s, Vec4f const a, Vec4f const b) {
-      |                     ^~~~~~
+bfs_simd_queue(std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > const&, int, std::vector<int, std::allocator<int> >&, std::vector<int, std::allocator<int> >&):
+        push    rbp
+        mov     rbp, rsp
+        push    rbx
+        sub     rsp, 312
+        mov     QWORD PTR [rbp-296], rdi
+        mov     DWORD PTR [rbp-300], esi
+        mov     QWORD PTR [rbp-312], rdx
+        mov     QWORD PTR [rbp-320], rcx
+        lea     rax, [rbp-160]
+        mov     rdi, rax
+        call    std::deque<int, std::allocator<int> >::deque() [complete object constructor]
+        lea     rdx, [rbp-300]
+        lea     rax, [rbp-160]
+        mov     rsi, rdx
+        mov     rdi, rax
+        call    std::deque<int, std::allocator<int> >::push_back(int const&)
+        mov     eax, DWORD PTR [rbp-300]
+        cdqe
+        mov     rdx, QWORD PTR [rbp-312]
+        mov     rsi, rax
+        mov     rdi, rdx
+        call    std::vector<int, std::allocator<int> >::operator[](unsigned long)
+        mov     DWORD PTR [rax], 1
+        jmp     .L41
+.L50:
+        lea     rax, [rbp-160]
+        mov     rdi, rax
+        call    std::deque<int, std::allocator<int> >::front()
+        mov     eax, DWORD PTR [rax]
+        mov     DWORD PTR [rbp-164], eax
+        lea     rax, [rbp-160]
+        mov     rdi, rax
+        call    std::deque<int, std::allocator<int> >::pop_front()
+        lea     rax, [rbp-164]
+        mov     rdx, QWORD PTR [rbp-320]
+        mov     rsi, rax
+        mov     rdi, rdx
+        call    std::vector<int, std::allocator<int> >::push_back(int const&)
+        mov     eax, DWORD PTR [rbp-164]
+        cdqe
+        mov     rdx, QWORD PTR [rbp-296]
+        mov     rsi, rax
+        mov     rdi, rdx
+        call    std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >::operator[](unsigned long) const
+        mov     rdi, rax
+        call    std::vector<int, std::allocator<int> >::size() const
+        mov     QWORD PTR [rbp-48], rax
+        mov     rax, QWORD PTR [rbp-48]
+        shr     rax, 2
+        mov     QWORD PTR [rbp-56], rax
+        mov     QWORD PTR [rbp-24], 0
+        jmp     .L42
+.L46:
+        mov     rax, QWORD PTR [rbp-24]
+        sal     rax, 2
+        mov     QWORD PTR [rbp-64], rax
+        lea     rax, [rbp-192]
+        mov     rdi, rax
+        call    Vec4i::Vec4i() [complete object constructor]
+        mov     eax, DWORD PTR [rbp-164]
+        cdqe
+        mov     rdx, QWORD PTR [rbp-296]
+        mov     rsi, rax
+        mov     rdi, rdx
+        call    std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >::operator[](unsigned long) const
+        mov     rdx, rax
+        mov     rax, QWORD PTR [rbp-64]
+        mov     rsi, rax
+        mov     rdi, rdx
+        call    std::vector<int, std::allocator<int> >::operator[](unsigned long) const
+        mov     rdx, rax
+        lea     rax, [rbp-192]
+        mov     rsi, rdx
+        mov     rdi, rax
+        call    Vec4i::load(void const*)
+        lea     rax, [rbp-208]
+        mov     rdi, rax
+        call    Vec4i::Vec4i() [complete object constructor]
+        lea     rax, [rbp-192]
+        mov     esi, 0
+        mov     rdi, rax
+        call    Vec4i::operator[](int) const
+        cdqe
+        mov     rdx, QWORD PTR [rbp-312]
+        mov     rsi, rax
+        mov     rdi, rdx
+        call    std::vector<int, std::allocator<int> >::operator[](unsigned long)
+        mov     rdx, rax
+        lea     rax, [rbp-208]
+        mov     rsi, rdx
+        mov     rdi, rax
+        call    Vec4i::load(void const*)
+        lea     rax, [rbp-80]
+        mov     esi, 0
+        mov     rdi, rax
+        call    Vec4i::Vec4i(int) [complete object constructor]
+        vmovdqa xmm1, XMMWORD PTR [rbp-80]
+        vmovdqa xmm0, XMMWORD PTR [rbp-208]
+        call    operator==(Vec4i, Vec4i)
+        vmovdqa XMMWORD PTR [rbp-224], xmm0
+        lea     rax, [rbp-240]
+        mov     esi, 1
+        mov     rdi, rax
+        call    Vec4i::Vec4i(int) [complete object constructor]
+        lea     rax, [rbp-256]
+        mov     esi, 0
+        mov     rdi, rax
+        call    Vec4i::Vec4i(int) [complete object constructor]
+        vmovdqa xmm2, XMMWORD PTR [rbp-256]
+        vmovdqa xmm1, XMMWORD PTR [rbp-240]
+        vmovdqa xmm0, XMMWORD PTR [rbp-224]
+        call    select(Vec4ib, Vec4i, Vec4i)
+        vmovdqa XMMWORD PTR [rbp-272], xmm0
+        mov     DWORD PTR [rbp-28], 0
+        jmp     .L43
+.L45:
+        mov     edx, DWORD PTR [rbp-28]
+        lea     rax, [rbp-272]
+        mov     esi, edx
+        mov     rdi, rax
+        call    Vec4i::operator[](int) const
+        cmp     eax, 1
+        sete    al
+        test    al, al
+        je      .L44
+        mov     edx, DWORD PTR [rbp-28]
+        lea     rax, [rbp-192]
+        mov     esi, edx
+        mov     rdi, rax
+        call    Vec4i::operator[](int) const
+        mov     DWORD PTR [rbp-276], eax
+        mov     eax, DWORD PTR [rbp-276]
+        cdqe
+        mov     rdx, QWORD PTR [rbp-312]
+        mov     rsi, rax
+        mov     rdi, rdx
+        call    std::vector<int, std::allocator<int> >::operator[](unsigned long)
+        mov     DWORD PTR [rax], 1
+        lea     rdx, [rbp-276]
+        lea     rax, [rbp-160]
+        mov     rsi, rdx
+        mov     rdi, rax
+        call    std::deque<int, std::allocator<int> >::push_back(int const&)
+.L44:
+        inc     DWORD PTR [rbp-28]
+.L43:
+        cmp     DWORD PTR [rbp-28], 3
+        jle     .L45
+        inc     QWORD PTR [rbp-24]
+.L42:
+        mov     rax, QWORD PTR [rbp-24]
+        cmp     rax, QWORD PTR [rbp-56]
+        jb      .L46
+        mov     rax, QWORD PTR [rbp-56]
+        sal     rax, 2
+        mov     QWORD PTR [rbp-40], rax
+        jmp     .L47
+.L49:
+        mov     eax, DWORD PTR [rbp-164]
+        cdqe
+        mov     rdx, QWORD PTR [rbp-296]
+        mov     rsi, rax
+        mov     rdi, rdx
+        call    std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >::operator[](unsigned long) const
+        mov     rdx, rax
+        mov     rax, QWORD PTR [rbp-40]
+        mov     rsi, rax
+        mov     rdi, rdx
+        call    std::vector<int, std::allocator<int> >::operator[](unsigned long) const
+        mov     eax, DWORD PTR [rax]
+        mov     DWORD PTR [rbp-280], eax
+        mov     eax, DWORD PTR [rbp-280]
+        cdqe
+        mov     rdx, QWORD PTR [rbp-312]
+        mov     rsi, rax
+        mov     rdi, rdx
+        call    std::vector<int, std::allocator<int> >::operator[](unsigned long)
+        mov     eax, DWORD PTR [rax]
+        test    eax, eax
+        sete    al
+        test    al, al
+        je      .L48
+        mov     eax, DWORD PTR [rbp-280]
+        cdqe
+        mov     rdx, QWORD PTR [rbp-312]
+        mov     rsi, rax
+        mov     rdi, rdx
+        call    std::vector<int, std::allocator<int> >::operator[](unsigned long)
+        mov     DWORD PTR [rax], 1
+        lea     rdx, [rbp-280]
+        lea     rax, [rbp-160]
+        mov     rsi, rdx
+        mov     rdi, rax
+        call    std::deque<int, std::allocator<int> >::push_back(int const&)
+.L48:
+        inc     QWORD PTR [rbp-40]
+.L47:
+        mov     rax, QWORD PTR [rbp-40]
+        cmp     rax, QWORD PTR [rbp-48]
+        jb      .L49
+.L41:
+        lea     rax, [rbp-160]
+        mov     rdi, rax
+        call    std::deque<int, std::allocator<int> >::empty() const
+        xor     eax, 1
+        test    al, al
+        jne     .L50
+        lea     rax, [rbp-160]
+        mov     rdi, rax
+        call    std::deque<int, std::allocator<int> >::~deque() [complete object destructor]
+        jmp     .L53
+        mov     rbx, rax
+        lea     rax, [rbp-160]
+        mov     rdi, rax
+        call    std::deque<int, std::allocator<int> >::~deque() [complete object destructor]
+        mov     rax, rbx
+        mov     rdi, rax
+        call    _Unwind_Resume
+.L53:
+        mov     rbx, QWORD PTR [rbp-8]
+        leave
+        ret
+.LC0:
+        .string "{"
+.LC1:
+        .string ", "
+.LC2:
+        .string "}"
+print_edges(std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > const&):
+        push    rbp
+        mov     rbp, rsp
+        push    rbx
+        sub     rsp, 72
+        mov     QWORD PTR [rbp-72], rdi
+        mov     DWORD PTR [rbp-20], 0
+        jmp     .L55
+.L59:
+        mov     eax, DWORD PTR [rbp-20]
+        cdqe
+        mov     rdx, QWORD PTR [rbp-72]
+        mov     rsi, rax
+        mov     rdi, rdx
+        call    std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >::operator[](unsigned long) const
+        mov     QWORD PTR [rbp-32], rax
+        mov     rax, QWORD PTR [rbp-32]
+        mov     rdi, rax
+        call    std::vector<int, std::allocator<int> >::begin() const
+        mov     QWORD PTR [rbp-48], rax
+        mov     rax, QWORD PTR [rbp-32]
+        mov     rdi, rax
+        call    std::vector<int, std::allocator<int> >::end() const
+        mov     QWORD PTR [rbp-56], rax
+        jmp     .L56
+.L58:
+        lea     rax, [rbp-48]
+        mov     rdi, rax
+        call    __gnu_cxx::__normal_iterator<int const*, std::vector<int, std::allocator<int> > >::operator*() const
+        mov     eax, DWORD PTR [rax]
+        mov     DWORD PTR [rbp-36], eax
+        mov     eax, DWORD PTR [rbp-20]
+        cmp     eax, DWORD PTR [rbp-36]
+        jge     .L57
+        mov     esi, OFFSET FLAT:.LC0
+        mov     edi, OFFSET FLAT:std::cout
+        call    std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)
+        mov     rdx, rax
+        mov     eax, DWORD PTR [rbp-20]
+        mov     esi, eax
+        mov     rdi, rdx
+        call    std::basic_ostream<char, std::char_traits<char> >::operator<<(int)
+        mov     esi, OFFSET FLAT:.LC1
+        mov     rdi, rax
+        call    std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)
+        mov     rdx, rax
+        mov     eax, DWORD PTR [rbp-36]
+        mov     esi, eax
+        mov     rdi, rdx
+        call    std::basic_ostream<char, std::char_traits<char> >::operator<<(int)
+        mov     esi, OFFSET FLAT:.LC2
+        mov     rdi, rax
+        call    std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)
+        mov     esi, OFFSET FLAT:std::basic_ostream<char, std::char_traits<char> >& std::endl<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&)
+        mov     rdi, rax
+        call    std::basic_ostream<char, std::char_traits<char> >::operator<<(std::basic_ostream<char, std::char_traits<char> >& (*)(std::basic_ostream<char, std::char_traits<char> >&))
+.L57:
+        lea     rax, [rbp-48]
+        mov     rdi, rax
+        call    __gnu_cxx::__normal_iterator<int const*, std::vector<int, std::allocator<int> > >::operator++()
+.L56:
+        lea     rdx, [rbp-56]
+        lea     rax, [rbp-48]
+        mov     rsi, rdx
+        mov     rdi, rax
+        call    bool __gnu_cxx::operator!=<int const*, std::vector<int, std::allocator<int> > >(__gnu_cxx::__normal_iterator<int const*, std::vector<int, std::allocator<int> > > const&, __gnu_cxx::__normal_iterator<int const*, std::vector<int, std::allocator<int> > > const&)
+        test    al, al
+        jne     .L58
+        inc     DWORD PTR [rbp-20]
+.L55:
+        mov     eax, DWORD PTR [rbp-20]
+        movsx   rbx, eax
+        mov     rax, QWORD PTR [rbp-72]
+        mov     rdi, rax
+        call    std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >::size() const
+        cmp     rbx, rax
+        setb    al
+        test    al, al
+        jne     .L59
+        nop
+        nop
+        mov     rbx, QWORD PTR [rbp-8]
+        leave
+        ret
+.LC3:
+        .string "BFS Order:"
+.LC4:
+        .string " "
+print_bfs_order(std::vector<int, std::allocator<int> > const&):
+        push    rbp
+        mov     rbp, rsp
+        sub     rsp, 48
+        mov     QWORD PTR [rbp-40], rdi
+        mov     esi, OFFSET FLAT:.LC3
+        mov     edi, OFFSET FLAT:std::cout
+        call    std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)
+        mov     esi, OFFSET FLAT:std::basic_ostream<char, std::char_traits<char> >& std::endl<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&)
+        mov     rdi, rax
+        call    std::basic_ostream<char, std::char_traits<char> >::operator<<(std::basic_ostream<char, std::char_traits<char> >& (*)(std::basic_ostream<char, std::char_traits<char> >&))
+        mov     rax, QWORD PTR [rbp-40]
+        mov     QWORD PTR [rbp-8], rax
+        mov     rax, QWORD PTR [rbp-8]
+        mov     rdi, rax
+        call    std::vector<int, std::allocator<int> >::begin() const
+        mov     QWORD PTR [rbp-24], rax
+        mov     rax, QWORD PTR [rbp-8]
+        mov     rdi, rax
+        call    std::vector<int, std::allocator<int> >::end() const
+        mov     QWORD PTR [rbp-32], rax
+        jmp     .L61
+.L62:
+        lea     rax, [rbp-24]
+        mov     rdi, rax
+        call    __gnu_cxx::__normal_iterator<int const*, std::vector<int, std::allocator<int> > >::operator*() const
+        mov     eax, DWORD PTR [rax]
+        mov     DWORD PTR [rbp-12], eax
+        mov     eax, DWORD PTR [rbp-12]
+        mov     esi, eax
+        mov     edi, OFFSET FLAT:std::cout
+        call    std::basic_ostream<char, std::char_traits<char> >::operator<<(int)
+        mov     esi, OFFSET FLAT:.LC4
+        mov     rdi, rax
+        call    std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)
+        lea     rax, [rbp-24]
+        mov     rdi, rax
+        call    __gnu_cxx::__normal_iterator<int const*, std::vector<int, std::allocator<int> > >::operator++()
+.L61:
+        lea     rdx, [rbp-32]
+        lea     rax, [rbp-24]
+        mov     rsi, rdx
+        mov     rdi, rax
+        call    bool __gnu_cxx::operator!=<int const*, std::vector<int, std::allocator<int> > >(__gnu_cxx::__normal_iterator<int const*, std::vector<int, std::allocator<int> > > const&, __gnu_cxx::__normal_iterator<int const*, std::vector<int, std::allocator<int> > > const&)
+        test    al, al
+        jne     .L62
+        mov     esi, OFFSET FLAT:std::basic_ostream<char, std::char_traits<char> >& std::endl<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&)
+        mov     edi, OFFSET FLAT:std::cout
+        call    std::basic_ostream<char, std::char_traits<char> >::operator<<(std::basic_ostream<char, std::char_traits<char> >& (*)(std::basic_ostream<char, std::char_traits<char> >&))
+        nop
+        leave
+        ret
+.LC5:
+        .string "Edges in the graph:"
+.LC6:
+        .string "SIMD Queue BFS with size "
+.LC7:
+        .string ": "
+.LC8:
+        .string " s"
+main:
+        push    rbp
+        mov     rbp, rsp
+        push    rbx
+        sub     rsp, 168
+        mov     DWORD PTR [rbp-20], 10
+        lea     rax, [rbp-54]
+        mov     QWORD PTR [rbp-32], rax
+        nop
+        nop
+        mov     eax, DWORD PTR [rbp-20]
+        movsx   rcx, eax
+        lea     rdx, [rbp-54]
+        lea     rax, [rbp-80]
+        mov     rsi, rcx
+        mov     rdi, rax
+        call    std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >::vector(unsigned long, std::allocator<std::vector<int, std::allocator<int> > > const&) [complete object constructor]
+        lea     rax, [rbp-54]
+        mov     rdi, rax
+        call    std::__new_allocator<std::vector<int, std::allocator<int> > >::~__new_allocator() [base object destructor]
+        nop
+        lea     rax, [rbp-53]
+        mov     QWORD PTR [rbp-40], rax
+        nop
+        nop
+        mov     DWORD PTR [rbp-52], 0
+        mov     eax, DWORD PTR [rbp-20]
+        movsx   rsi, eax
+        lea     rcx, [rbp-53]
+        lea     rdx, [rbp-52]
+        lea     rax, [rbp-112]
+        mov     rdi, rax
+        call    std::vector<int, std::allocator<int> >::vector(unsigned long, int const&, std::allocator<int> const&) [complete object constructor]
+        lea     rax, [rbp-53]
+        mov     rdi, rax
+        call    std::__new_allocator<int>::~__new_allocator() [base object destructor]
+        nop
+        lea     rax, [rbp-144]
+        mov     rdi, rax
+        call    std::vector<int, std::allocator<int> >::vector() [complete object constructor]
+        mov     edi, 0
+        call    time
+        mov     edi, eax
+        call    srand
+        mov     DWORD PTR [rbp-172], 0
+        jmp     .L71
+.L75:
+        mov     eax, DWORD PTR [rbp-172]
+        inc     eax
+        mov     DWORD PTR [rbp-176], eax
+        jmp     .L72
+.L74:
+        call    rand
+        and     eax, 1
+        test    eax, eax
+        sete    al
+        test    al, al
+        je      .L73
+        mov     eax, DWORD PTR [rbp-172]
+        movsx   rdx, eax
+        lea     rax, [rbp-80]
+        mov     rsi, rdx
+        mov     rdi, rax
+        call    std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >::operator[](unsigned long)
+        mov     rdx, rax
+        lea     rax, [rbp-176]
+        mov     rsi, rax
+        mov     rdi, rdx
+        call    std::vector<int, std::allocator<int> >::push_back(int const&)
+        mov     eax, DWORD PTR [rbp-176]
+        movsx   rdx, eax
+        lea     rax, [rbp-80]
+        mov     rsi, rdx
+        mov     rdi, rax
+        call    std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >::operator[](unsigned long)
+        mov     rdx, rax
+        lea     rax, [rbp-172]
+        mov     rsi, rax
+        mov     rdi, rdx
+        call    std::vector<int, std::allocator<int> >::push_back(int const&)
+.L73:
+        mov     eax, DWORD PTR [rbp-176]
+        inc     eax
+        mov     DWORD PTR [rbp-176], eax
+.L72:
+        mov     eax, DWORD PTR [rbp-176]
+        cmp     DWORD PTR [rbp-20], eax
+        jg      .L74
+        mov     eax, DWORD PTR [rbp-172]
+        inc     eax
+        mov     DWORD PTR [rbp-172], eax
+.L71:
+        mov     eax, DWORD PTR [rbp-172]
+        cmp     DWORD PTR [rbp-20], eax
+        jg      .L75
+        mov     esi, OFFSET FLAT:.LC5
+        mov     edi, OFFSET FLAT:std::cout
+        call    std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)
+        mov     esi, OFFSET FLAT:std::basic_ostream<char, std::char_traits<char> >& std::endl<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&)
+        mov     rdi, rax
+        call    std::basic_ostream<char, std::char_traits<char> >::operator<<(std::basic_ostream<char, std::char_traits<char> >& (*)(std::basic_ostream<char, std::char_traits<char> >&))
+        lea     rax, [rbp-80]
+        mov     rdi, rax
+        call    print_edges(std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > const&)
+        call    std::chrono::_V2::system_clock::now()
+        mov     QWORD PTR [rbp-152], rax
+        lea     rcx, [rbp-144]
+        lea     rdx, [rbp-112]
+        lea     rax, [rbp-80]
+        mov     esi, 0
+        mov     rdi, rax
+        call    bfs_simd_queue(std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > const&, int, std::vector<int, std::allocator<int> >&, std::vector<int, std::allocator<int> >&)
+        call    std::chrono::_V2::system_clock::now()
+        mov     QWORD PTR [rbp-160], rax
+        lea     rdx, [rbp-152]
+        lea     rax, [rbp-160]
+        mov     rsi, rdx
+        mov     rdi, rax
+        call    std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >(std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&, std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&)
+        mov     QWORD PTR [rbp-48], rax
+        lea     rdx, [rbp-48]
+        lea     rax, [rbp-168]
+        mov     rsi, rdx
+        mov     rdi, rax
+        call    std::chrono::duration<double, std::ratio<1l, 1l> >::duration<long, std::ratio<1l, 1000000000l>, void>(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&)
+        mov     esi, OFFSET FLAT:.LC6
+        mov     edi, OFFSET FLAT:std::cout
+        call    std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)
+        mov     rdx, rax
+        mov     eax, DWORD PTR [rbp-20]
+        mov     esi, eax
+        mov     rdi, rdx
+        call    std::basic_ostream<char, std::char_traits<char> >::operator<<(int)
+        mov     esi, OFFSET FLAT:.LC7
+        mov     rdi, rax
+        call    std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)
+        mov     rbx, rax
+        lea     rax, [rbp-168]
+        mov     rdi, rax
+        call    std::chrono::duration<double, std::ratio<1l, 1l> >::count() const
+        vmovq   rax, xmm0
+        vmovq   xmm0, rax
+        mov     rdi, rbx
+        call    std::basic_ostream<char, std::char_traits<char> >::operator<<(double)
+        mov     esi, OFFSET FLAT:.LC8
+        mov     rdi, rax
+        call    std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)
+        mov     esi, OFFSET FLAT:std::basic_ostream<char, std::char_traits<char> >& std::endl<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&)
+        mov     rdi, rax
+        call    std::basic_ostream<char, std::char_traits<char> >::operator<<(std::basic_ostream<char, std::char_traits<char> >& (*)(std::basic_ostream<char, std::char_traits<char> >&))
+        lea     rax, [rbp-144]
+        mov     rdi, rax
+        call    print_bfs_order(std::vector<int, std::allocator<int> > const&)
+        mov     ebx, 0
+        lea     rax, [rbp-144]
+        mov     rdi, rax
+        call    std::vector<int, std::allocator<int> >::~vector() [complete object destructor]
+        lea     rax, [rbp-112]
+        mov     rdi, rax
+        call    std::vector<int, std::allocator<int> >::~vector() [complete object destructor]
+        lea     rax, [rbp-80]
+        mov     rdi, rax
+        call    std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >::~vector() [complete object destructor]
+        mov     eax, ebx
+        jmp     .L84
+        mov     rbx, rax
+        lea     rax, [rbp-54]
+        mov     rdi, rax
+        call    std::__new_allocator<std::vector<int, std::allocator<int> > >::~__new_allocator() [base object destructor]
+        nop
+        mov     rax, rbx
+        mov     rdi, rax
+        call    _Unwind_Resume
+        mov     rbx, rax
+        lea     rax, [rbp-53]
+        mov     rdi, rax
+        call    std::__new_allocator<int>::~__new_allocator() [base object destructor]
+        nop
+        jmp     .L79
+        mov     rbx, rax
+        lea     rax, [rbp-144]
+        mov     rdi, rax
+        call    std::vector<int, std::allocator<int> >::~vector() [complete object destructor]
+        lea     rax, [rbp-112]
+        mov     rdi, rax
+        call    std::vector<int, std::allocator<int> >::~vector() [complete object destructor]
+.L79:
+        lea     rax, [rbp-80]
+        mov     rdi, rax
+        call    std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >::~vector() [complete object destructor]
+        mov     rax, rbx
+        mov     rdi, rax
+        call    _Unwind_Resume
+.L84:
+        mov     rbx, QWORD PTR [rbp-8]
+        leave
+        ret
+
+.LC9:
+        .string "cannot create std::deque larger than max_size()"
+.LC10:
+        .string "vector::_M_realloc_append"
+.LC11:
+        .string "cannot create std::vector larger than max_size()"
+
+.LC12:
+        .long   0
+        .long   1104006501
