@@ -41,12 +41,14 @@ int main()
     int n = 100000; // Adjust the size
     std::vector<std::vector<int>> graph(n);
 
-    // Example: Manually adding edges for demonstration
-    // Replace this with actual edge addition logic
-    for (int i = 0; i < n - 1; ++i)
+    // complete graph
+    for (int i = 0; i < n; ++i)
     {
-        graph[i].push_back(i + 1);
-        graph[i + 1].push_back(i); // Undirected graph, add both directions
+        for (int j = i + 1; j < n; ++j)
+        {
+            graph[i].push_back(j);
+            graph[j].push_back(i); // Undirected graph, add both directions
+        }
     }
 
     std::vector<bool> visited(n, false);
