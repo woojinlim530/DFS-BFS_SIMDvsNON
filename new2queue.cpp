@@ -58,7 +58,7 @@ void print_bfs_order(const std::vector<int> &bfs_order)
 
 int main()
 {
-    int n = 100000; // Adjust the size
+    int n = 10; // Adjust the size
     std::vector<std::vector<int>> graph(n);
 
     // Seed the random number generator
