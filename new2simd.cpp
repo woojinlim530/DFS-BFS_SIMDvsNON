@@ -1,3 +1,5 @@
+// must include -O3 and -mavx for SIMD instruction
+
 #include <vector>
 #include <deque>
 #include <chrono>
