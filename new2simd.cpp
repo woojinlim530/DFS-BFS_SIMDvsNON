@@ -118,9 +118,9 @@ int main()
     }
 
     
-    // Optionally, print edges before running BFS
-    std::cout << "Edges in the graph:" << std::endl;
-    print_edges(graph);
+    // print edges before running BFS
+    //std::cout << "Edges in the graph:" << std::endl;
+    //print_edges(graph);
 
     auto start = std::chrono::high_resolution_clock::now();
     bfs_simd_queue(graph, 0, visited, bfs_order);
@@ -130,7 +130,7 @@ int main()
     std::cout << "SIMD Queue BFS with size " << n << ": " << duration.count() << " s" << std::endl;
 
     // Print BFS order
-    print_bfs_order(bfs_order);
+    //print_bfs_order(bfs_order);
 
     return 0;
 }

@@ -56,7 +56,7 @@ void print_bfs_order(const std::vector<int> &bfs_order)
 
 int main()
 {
-    int n = 10; // Adjust the size
+    int n = 10000; // Adjust the size
     std::vector<std::vector<int>> graph(n);
 
     // Create a complete graph
@@ -74,9 +74,9 @@ int main()
     std::vector<bool> visited(n, false);
     std::vector<int> bfs_order; // Vector to store BFS order
 
-    // Optionally, print edges before running BFS
-    std::cout << "Edges in the graph:" << std::endl;
-    print_edges(graph);
+    // Print edges before running BFS
+    //std::cout << "Edges in the graph:" << std::endl;
+    //print_edges(graph);
 
     auto start_time = std::chrono::high_resolution_clock::now();
     bfs_deque(graph, 0, visited, bfs_order);
@@ -86,7 +86,7 @@ int main()
     std::cout << "Deque BFS with size " << n << ": " << elapsed.count() << " s" << std::endl;
 
     // Print BFS order
-    print_bfs_order(bfs_order);
+    //print_bfs_order(bfs_order);
 
     return 0;
 }
